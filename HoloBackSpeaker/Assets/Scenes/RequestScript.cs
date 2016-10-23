@@ -26,6 +26,22 @@ public class RequestScript : MonoBehaviour {
                 Debug.Log("Bubbled albumArt");
                 StartCoroutine(callToAPI("picture"));
                 break;
+
+            case "volumeUp":
+                Debug.Log("Bubbled Volume Up");
+                StartCoroutine(callToAPI("volume", "value=9"));
+                break;
+
+            case "volumeDown":
+                Debug.Log("Bubbled Volume Down");
+                StartCoroutine(callToAPI("volume", "value=-9"));
+                break;
+
+            case "getInfo":
+                Debug.Log("Bubble Song Status");
+                StartCoroutine(callToAPI(" "));
+                break;
+
             default:
                 Debug.Log("No good bubble called");
                 break;

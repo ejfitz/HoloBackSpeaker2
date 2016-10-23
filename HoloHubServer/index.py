@@ -70,7 +70,7 @@ def volume():
 
     if volumeNumber > 100:
         volumeNumber=100
-    sonos.volume = volumeNumber
+    sonos.volume += volumeNumber
     resp = Response('Volume Changed', status=200)
     return resp
 
