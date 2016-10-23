@@ -51,13 +51,13 @@ public class RequestScript : MonoBehaviour {
 
     IEnumerator callToAPI(string request, string parameters = null)
     {
-        url += request;
+        string sendingURL = url + request;
 
         if (parameters != null)
         {
-            url += "?" + parameters;
+            sendingURL += "?" + parameters;
         }
-        WWW www = new WWW(url);
+        WWW www = new WWW(sendingURL);
 
         yield return www;
         string responseString = www.text;
