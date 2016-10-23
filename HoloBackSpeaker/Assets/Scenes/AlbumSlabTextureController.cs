@@ -3,8 +3,10 @@ using System.Collections;
 
 public class AlbumSlabTextureController : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
+
 	
 	}
 	
@@ -12,4 +14,12 @@ public class AlbumSlabTextureController : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnUrlSent(string url) {
+        Debug.Log(url);
+    }
+
+    void OnTap() {
+        Debug.Log("second call");
+    }
 }
