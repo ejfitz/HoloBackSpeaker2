@@ -69,7 +69,7 @@ public class Interactible : MonoBehaviour {
         /* TODO: DEVELOPER CODING EXERCISE 6.a */
         // 6.a: Handle the OnSelect by sending a PerformTagAlong message.
         Debug.Log("I am: " + gameObject.name);
-        Debug.Log("And I Pooted");
+        Debug.Log("And I Jumped");
 
         // EXAMPLE: NavButton btn = gameObject.GetComponentInParent<NavButton>();
         gameObject.SendMessageUpwards("makeAPIRequest", gameObject.name);
