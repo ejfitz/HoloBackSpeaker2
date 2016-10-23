@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 /// <summary>
 /// The Interactible class flags a Game Object as being "Interactible".
@@ -8,6 +11,9 @@ public class Interactible : MonoBehaviour {
     [Tooltip("Audio clip to play when interacting with this hologram.")]
     public AudioClip TargetFeedbackSound;
     private AudioSource audioSource;
+
+    KeywordRecognizer keywordRecognizer = null;
+    Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
 
     private Material[] defaultMaterials;
 
@@ -21,6 +27,41 @@ public class Interactible : MonoBehaviour {
         }
 
         EnableAudioHapticFeedback();
+
+        keywords.Add("Play Music", () =>
+        {
+            // Call the OnReset method on every descendant object.
+            gameObject.SendMessageUpwards("makeAPIRequest", "play");
+        });
+
+        keywords.Add("Volume Up", () =>
+        {
+            // Call the OnReset method on every descendant object.
+            gameObject.SendMessageUpwards("makeAPIRequest", "volumeup");
+        });
+
+        keywords.Add("Volume Down", () =>
+        {
+            // Call the OnReset method on every descendant object.
+            gameObject.SendMessageUpwards("makeAPIRequest", "volumedown");
+        });
+
+        keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+
+        // Register a callback for the KeywordRecognizer and start recognizing!
+        keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+        keywordRecognizer.Start();
+
+    }
+
+    //Added Voice Keyword Recognizing and starts the recognizing function.
+    private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    {
+        System.Action keywordAction;
+        if (keywords.TryGetValue(args.text, out keywordAction))
+        {
+            keywordAction.Invoke();
+        }
     }
 
     private void EnableAudioHapticFeedback() {
