@@ -72,8 +72,9 @@ public class Interactible : MonoBehaviour {
         Debug.Log("And I Pooted");
 
         // EXAMPLE: NavButton btn = gameObject.GetComponentInParent<NavButton>();
+        gameObject.SendMessageUpwards("makeAPIRequest", gameObject.name);
 
         
-        //this.SendMessage("PerformTagAlong"); //if we wanted to do some tag along stuff.
+    
     }
 }
